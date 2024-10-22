@@ -1,6 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
+"use client"
 
+import { Bar, BarChart, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts"
+import { ChartConfig, ChartContainer } from "@/components/ui/chart"
+
+// Updated data with income and expenses
 const data = [
   { month: "Jan", income: 4000, expenses: 2400 },
   { month: "Feb", income: 3000, expenses: 1398 },
@@ -10,22 +13,34 @@ const data = [
   { month: "Jun", income: 2390, expenses: 3800 },
 ]
 
+// Update chartConfig if needed
+const chartConfig = {
+  income: {
+    label: "Income",
+    color: "#2563eb",
+  },
+  expenses: {
+    label: "Expenses",
+    color: "#60a5fa",
+  },
+} satisfies ChartConfig
+
 export default function FinancialSummary() {
   return (
-    <Card className="mt-8">
-      <CardHeader>
-        <CardTitle>Financial Summary</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <>
+      <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data}>
             <XAxis dataKey="month" />
             <YAxis />
-            <Bar dataKey="income" fill="#8884d8" name="Income" />
-            <Bar dataKey="expenses" fill="#82ca9d" name="Expenses" />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="income" fill={chartConfig.income.color} radius={4} />
+            <Bar dataKey="expenses" fill={chartConfig.expenses.color} radius={4} />
           </BarChart>
         </ResponsiveContainer>
-      </CardContent>
-    </Card>
+      </ChartContainer>
+    </>
+
   )
 }
