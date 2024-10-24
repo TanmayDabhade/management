@@ -10,12 +10,13 @@ export default function Dashboard() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
       <DashboardOverview />
-      <FinancialSummary />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
         <TenantList />
         <MaintenanceRequests />
       </div>
-      
+      <div className='text-3xl font-bold mb-8 py-8'>
+      <FinancialSummary />
+      </div>
     </div>
   )
 }
